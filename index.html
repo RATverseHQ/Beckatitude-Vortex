@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesseract Slider - Age of RATpires</title>
+    <title>Beck Vortex™ Visualizer</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
             display: flex;
@@ -53,12 +52,6 @@
             to { transform: rotateX(360deg) rotateY(360deg); }
         }
 
-        .chart-container {
-            width: 600px;
-            height: 400px;
-            margin-top: 20px;
-        }
-
         footer {
             margin-top: 20px;
             font-size: 0.9em;
@@ -77,38 +70,8 @@
     </style>
 </head>
 <body>
-    <h1>Age of RATpires: Emotional-Intellectual Tesseract</h1>
-    <div class="slider-container">
-        <label for="slider">Adjust your toaster luster intensity:</label>
-        <input type="range" id="slider" min="0" max="100" value="50">
-    </div>
-    <div class="cube-container">
-        <div class="cube">
-            <div class="front"></div>
-            <div class="back"></div>
-            <div class="right"></div>
-            <div class="left"></div>
-            <div class="top"></div>
-            <div class="bottom"></div>
-        </div>
-    </div>
-    <div class="chart-container" id="scatter-chart"></div>
-    <footer>
-        <p>
-            Curious about our origins? 
-            <a href="wix-legacy.html" target="_blank">Unlock the depths of RATverse history</a>
-        </p>
-    </footer>
-    <script>
-        const slider = document.getElementById('slider');
-        const cube = document.querySelector('.cube');
-
-        slider.addEventListener('input', (e) => {
-            const speed = 6 - e.target.value / 20; // Adjust rotation speed based on slider value
-            cube.style.animation = `rotate ${speed}s infinite linear`;
-        });
-
-        // Plotly.js Scatter Chart
+    <h1>Visualisez votre degré de Beckatitude</h1>
+    // Plotly.js Scatter Chart
         const trace = {
             x: [10, 30, 50], // Sample Beck Vortex values
             y: [20, 40, 60], // Earnestness values
@@ -134,5 +97,56 @@
 
         Plotly.newPlot('scatter-chart', [trace], layout);
     </script>
+</body>
+</html>
+    <div class="placement-container">
+    <h3>Place Yourself in the Vortex</h3>
+    <label for="beck-slider">Beck Vortex:</label>
+    <input type="range" id="beck-slider" min="0" max="100" value="50">
+    <label for="earnest-slider">Sincerité / Détachement :</label>
+    <input type="range" id="earnest-slider" min="0" max="100" value="50">
+    <label for="poverty-slider">Pauvreté / Ascétisme (plus ou moins volontaire...) :</label>
+    <input type="range" id="poverty-slider" min="0" max="100" value="50">
+    <button id="add-point">Plot Yourself</button>
+</div>
+<div class="selma-lore">
+    <p><em>Remerciements</em></p>
+    <p>
+        À Selma, dont les appels insistants pour que je fasse l'expérience de "la mort de l'égo" m'ont inspiré à créer cette connerie à la place. J'ai énormément de temps libre.
+    </p>
+</div>
+<button id="debraButton">I'm Not Afraid To Cry</button>
+
+    <footer>
+        <p>
+            Curious about our origins? 
+            <a href="wix-legacy.html" target="_blank">Unlock the depths of RATverse history</a>
+        </p>
+    </footer>
+    <script>
+        const addPointButton = document.getElementById('add-point');
+
+addPointButton.addEventListener('click', () => {
+    const beckValue = document.getElementById('beck-slider').value;
+    const earnestValue = document.getElementById('earnest-slider').value;
+    const povertyValue = document.getElementById('poverty-slider').value;
+
+    const userPoint = {
+        x: [beckValue],
+        y: [earnestValue],
+        z: [povertyValue],
+        mode: 'markers',
+        marker: {
+            size: 10,
+            color: 'red', // Highlight user point
+            symbol: 'diamond'
+        },
+        name: 'Toi'
+    };
+
+    Plotly.addTraces('scatter-chart', userPoint);
+});
+    </script>
+<script src="script.js"></script>
 </body>
 </html>
