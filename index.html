@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesseract Slider - Age of RATpires</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .slider-container {
+            margin: 20px;
+        }
+
+        .cube-container {
+            perspective: 800px;
+        }
+
+        .cube {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: rotate 5s infinite linear;
+        }
+
+        .cube div {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(150, 150, 255, 0.7);
+            border: 2px solid #fff;
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(75px); }
+        .back   { transform: rotateY(180deg) translateZ(75px); }
+        .right  { transform: rotateY( 90deg) translateZ(75px); }
+        .left   { transform: rotateY(-90deg) translateZ(75px); }
+        .top    { transform: rotateX( 90deg) translateZ(75px); }
+        .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+        @keyframes rotate {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .chart-container {
+            width: 600px;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age of RATpires: Emotional-Intellectual Tesseract</h1>
+    <div class="slider-container">
+        <label for="slider">Adjust your toaster luster intensity:</label>
+        <input type="range" id="slider" min="0" max="100" value="50">
+    </div>
+    <div class="cube-container">
+        <div class="cube">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="right"></div>
+            <div class="left"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+    </div>
+    <div class="chart-container" id="scatter-chart"></div>
+    <footer>
+        <p>
+            Curious about our origins? 
+            <a href="wix-legacy.html" target="_blank">Unlock the depths of RATverse history</a>
+        </p>
+    </footer>
+    <script>
+        const slider = document.getElementById('slider');
+        const cube = document.querySelector('.cube');
+
+        slider.addEventListener('input', (e) => {
+            const speed = 6 - e.target.value / 20; // Adjust rotation speed based on slider value
+            cube.style.animation = `rotate ${speed}s infinite linear`;
+        });
+
+        // Plotly.js Scatter Chart
+        const trace = {
+            x: [10, 30, 50], // Sample Beck Vortex values
+            y: [20, 40, 60], // Earnestness values
+            z: [15, 35, 75], // Poverty vs. Asceticism
+            mode: 'markers',
+            marker: {
+                size: 8,
+                color: [10, 30, 50], // Color based on Beck Vortex
+                colorscale: 'Viridis',
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        };
+
+        const layout = {
+            title: 'Beck Vortex Positioning',
+            scene: {
+                xaxis: { title: 'Beck Vortex' },
+                yaxis: { title: 'Earnestness vs. Detachment' },
+                zaxis: { title: 'Poverty vs. Self-Imposed Asceticism' }
+            }
+        };
+
+        Plotly.newPlot('scatter-chart', [trace], layout);
+    </script>
+</body>
+</html>
