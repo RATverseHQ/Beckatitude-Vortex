@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +15,12 @@
         }
 
         #scatter-chart {
-            width: 80vw;
-            height: 60vh;
-            margin: auto;
+            width: 60vw;
+            height: 50vh;
+            margin: 20px auto;
+            border: 2px solid #333;
+            background-color: #fff;
+            border-radius: 10px;
         }
 
         .placement-container {
@@ -52,6 +55,18 @@
             margin-top: 20px;
             font-size: 0.9em;
         }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +74,7 @@
     <div id="scatter-chart"></div>
 
     <div class="placement-container">
-        <h3>Place toi dans le Vortex : </h3>
+        <h3>Place toi dans le Vortex :</h3>
         <label for="beck-slider">Beck Vortex :</label>
         <input type="range" id="beck-slider" min="0" max="100" value="50">
         <label for="earnest-slider">Sincérité / Détachement :</label>
@@ -67,6 +82,10 @@
         <label for="poverty-slider">Pauvreté / Ascétisme (plus ou moins volontaire...) :</label>
         <input type="range" id="poverty-slider" min="0" max="100" value="50">
         <button id="add-point">Place Toi</button>
+    </div>
+
+    <div>
+        <button id="debra-button">Je n'ai pas peur de pleurer Debra</button>
     </div>
 
     <div class="selma-lore">
@@ -77,11 +96,10 @@
     </div>
 
     <footer>
-        <p>
-            Curieux à propos de nos origines ? 
-            <a href="wix-legacy.html" target="_blank">Débloque la profondeur de ton esprit</a>
-        </p>
+        <p>Curieux à propos de nos origines ? <a href="wix-legacy.html" target="_blank">Débloque la profondeur de ton esprit</a></p>
     </footer>
+
+    <div id="toast" class="toast">Je n'ai pas peur de pleurer.</div>
 
     <script>
         // Initial Plotly Scatter Chart
@@ -97,15 +115,15 @@
                 opacity: 0.8
             },
             type: 'scatter3d',
-            name: 'Sample Points'
+            name: 'Points Exemple'
         };
 
         const layout = {
-            title: 'Beck Vortex Positioning',
+            title: 'Positionnement dans le Beck Vortex™',
             scene: {
                 xaxis: { title: 'Beck Vortex' },
-                yaxis: { title: 'Earnestness vs. Detachment' },
-                zaxis: { title: 'Poverty vs. Self-Imposed Asceticism' }
+                yaxis: { title: 'Sincérité vs. Détachement' },
+                zaxis: { title: 'Pauvreté vs. Ascétisme Volontaire' }
             }
         };
 
@@ -113,7 +131,6 @@
 
         // Add User Point to Chart
         const addPointButton = document.getElementById('add-point');
-
         addPointButton.addEventListener('click', () => {
             const beckValue = parseInt(document.getElementById('beck-slider').value);
             const earnestValue = parseInt(document.getElementById('earnest-slider').value);
@@ -125,14 +142,24 @@
                 z: [povertyValue],
                 mode: 'markers',
                 marker: {
-                    size: 10,
-                    color: 'red', // Highlight user point
+                    size: 12,
+                    color: 'rgb(255,0,0)', // Highlight user point in red
                     symbol: 'diamond'
                 },
-                name: 'Toi'
+                name: 'Vous'
             };
 
             Plotly.addTraces('scatter-chart', userPoint);
+        });
+
+        // Debra Button Logic
+        const debraButton = document.getElementById('debra-button');
+        const toast = document.getElementById('toast');
+
+        debraButton.addEventListener('click', () => {
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            alert('I am not afraid to cry. Debra is playing in your heart.');
         });
     </script>
 </body>
