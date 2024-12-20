@@ -188,6 +188,8 @@
         <button id="debra-button">Je n'ai pas peur de pleurer Debra</button>
     </div>
 
+    <div id="spinning-cube"></div>
+
     <div class="selma-lore">
         <p><em>Remerciements</em></p>
         <p>
@@ -228,8 +230,16 @@
         debraButton.addEventListener('click', () => {
             toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 3000);
-            alert('I am not afraid to cry. Debra joue dans ton coeur (les navigateurs bloquent la musique, fais un effort et utilise ton imagination).');
+            alert('I am not afraid to cry. Debra joue dans ton coeur (j`ai pas les droits, fais un effort et utilise ton imagination).');
         });
+        debraButton.addEventListener('click', () => {
+    toast.style.display = 'block';
+    document.getElementById('spinning-cube').style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+        document.getElementById('spinning-cube').style.display = 'none';
+    }, 3000);
+});
     </script>
 </body>
 </html>
