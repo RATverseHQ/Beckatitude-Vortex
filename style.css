@@ -1,0 +1,44 @@
+body {
+  background-color: #d4e4d2; /* Organic olive green supremacy */
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  cursor: url("https://cur.cursors-4u.net/others/oth-1/oth44.cur"), auto;
+}
+
+h1 {
+  color: #3e6651; /* A darker green to ground our philosophical musings */
+}
+
+#tesseract-container {
+  perspective: 1000px;
+  margin: 50px auto;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotate 10s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+#slider-container {
+  margin: 20px;
+}
+
+input[type="range"] {
+  width: 80%;
+}
