@@ -66,8 +66,6 @@
                 <label><input type="radio" name="q1" value="0"> Je laisse jouer la chanson sans trop réagir.</label>
                 <label><input type="radio" name="q1" value="5"> Je hoche la tête avec appréciation et souris devant l’absurdité.</label>
                 <label><input type="radio" name="q1" value="10"> Je chante avec un enthousiasme dramatique et arrache ma chemise—c’est un chef-d'œuvre !</label>
-                <label><input type="radio" name="q1" value="void" id="q1-void"> Je ne connais pas cette chanson et je ne vais pas l’écouter avant de répondre.</label>
-
             </div>
             <div class="question">
                 <p>2. Comment réagis-tu quand quelqu’un partage une histoire profondément personnelle ?</p>
@@ -205,59 +203,43 @@
 
     <div id="toast" class="toast">Je n'ai pas peur de pleurer.</div>
 
-   <script>
-    // Detect if the "I refuse to listen to Debra" answer is selected
-    document.getElementById('q1-void').addEventListener('change', function() {
-        if (this.checked) {
-            // Disable all other form inputs
-            document.querySelectorAll('#quiz-form input').forEach(input => {
-                if (input !== this) {
-                    input.disabled = true;
-                }
-            });
+    <script>
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            const form = document.getElementById('quiz-form');
+            let earnestness = 50, asceticism = 50, beckVortex = 50; // Default scores
 
-            // Replace the quiz content with an aggressive message
-            document.getElementById('quiz-container').innerHTML = `
-                <h2>Pourquoi es-tu comme ça ?</h2>
-                <p>Si tu ne veux même pas écouter <em>Debra</em>, je ne vois pas pourquoi tu es là.</p>
-                <p>Tu peux partir maintenant.</p>
-                <button onclick="window.location.reload();">Recommencer et faire un effort</button>
-            `;
-
-            // Dramatic alert
-            setTimeout(() => {
-                alert("Sérieusement ? Va écouter 'Debra' et reviens.");
-            }, 1000);
-        }
-    });
-
-    // Quiz results calculation
-    document.getElementById('submit-quiz').addEventListener('click', function() {
-        const form = document.getElementById('quiz-form');
-        let earnestness = 50, asceticism = 50, beckVortex = 50; // Default scores
-
-        const answers = new FormData(form);
-        for (let [key, value] of answers.entries()) {
-            const val = parseInt(value);
-            if (!isNaN(val)) {  // Ensures valid numbers only
-                if (['q2', 'q5', 'q8', 'q11', 'q13'].includes(key)) earnestness += val;
-                if (['q3', 'q6', 'q9', 'q12', 'q15'].includes(key)) asceticism += val;
-                if (['q1', 'q4', 'q7', 'q10', 'q14'].includes(key)) beckVortex += val;
+            const answers = new FormData(form);
+            for (let [key, value] of answers.entries()) {
+                const val = parseInt(value);
+                if (key === 'q2' || key === 'q5' || key === 'q8' || key === 'q11' || key === 'q13') earnestness += val;
+                if (key === 'q3' || key === 'q6' || key === 'q9' || key === 'q12' || key === 'q15') asceticism += val;
+                if (key === 'q1' || key === 'q4' || key === 'q7' || key === 'q10' || key === 'q14') beckVortex += val;
             }
-        }
 
-        document.getElementById('results').innerHTML = `
-            <p>Beck Vortex : ${beckVortex}</p>
-            <p>Sincérité/Détachement : ${earnestness}</p>
-            <p>Pauvreté/Ascétisme : ${asceticism}</p>
-        `;
-    });
+            document.getElementById('results').innerHTML = `
+                <p>Beck Vortex : ${beckVortex}</p>
+                <p>Sincérité/Détachement : ${earnestness}</p>
+                <p>Pauvreté/Ascétisme : ${asceticism}</p>
+            `;
+        });
 
-    // Debra Button Logic
-    document.getElementById('debra-button').addEventListener('click', () => {
-        alert('I am not afraid to cry. Debra joue dans ton cœur (ton navigateur bloque la musique, fais un effort et utilise ton imagination).');
-    });
+        // Debra Button Logic
+        const debraButton = document.getElementById('debra-button');
+        const toast = document.getElementById('toast');
 
-</script>
+        debraButton.addEventListener('click', () => {
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            alert('I am not afraid to cry. Debra joue dans ton coeur (ton navigateur bloque la musique, fais un effort et utilise ton imagination).');
+        });
+        debraButton.addEventListener('click', () => {
+    toast.style.display = 'block';
+    document.getElementById('spinning-cube').style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+        document.getElementById('spinning-cube').style.display = 'none';
+    }, 3000);
+});
+    </script>
 </body>
 </html>
