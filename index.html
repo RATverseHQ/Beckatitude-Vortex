@@ -206,33 +206,40 @@
     <div id="toast" class="toast">Je n'ai pas peur de pleurer.</div>
 
     <script>
-        <script>
-    // Detect if the void answer is selected
-    document.getElementById('q1-void').addEventListener('change', function() {
-        if (this.checked) {
-            // Disable all other form inputs
-            document.querySelectorAll('#quiz-form input').forEach(input => {
-                if (input !== this) {
-                    input.disabled = true;
-                }
-            });
+        // Detect if the "I refuse to listen to Debra" answer is selected
+        document.getElementById('q1-void').addEventListener('change', function() {
+            if (this.checked) {
+                // Disable all other form inputs
+                document.querySelectorAll('#quiz-form input').forEach(input => {
+                    if (input !== this) {
+                        input.disabled = true;
+                    }
+                });
 
-            // Replace the quiz content with an aggressive message
-            document.querySelector('.quiz-container').innerHTML = `
-                <h2>Pourquoi es-tu comme ça ?</h2>
-                <p>Si tu ne veux même pas écouter <em>Debra</em>, je ne vois pas pourquoi tu es là.</p>
-                <p>Tu peux partir maintenant.</p>
-                <button onclick="window.location.reload();">Recommencer et faire un effort</button>
-            `;
+                // Replace the quiz content with an aggressive message
+                document.getElementById('quiz-container').innerHTML = `
+                    <h2>Pourquoi es-tu comme ça ?</h2>
+                    <p>Si tu ne veux même pas écouter <em>Debra</em>, je ne vois pas pourquoi tu es là.</p>
+                    <p>Tu peux partir maintenant.</p>
+                    <button onclick="window.location.reload();">Recommencer et faire un effort</button>
+                `;
 
-            // Optionally, add a dramatic alert
-            setTimeout(() => {
-                alert("Sérieusement ? Va écouter 'Debra' et reviens.");
-            }, 1000);
-        }
-    });
-</script>
+                // Dramatic alert
+                setTimeout(() => {
+                    alert("Sérieusement ? Va écouter 'Debra' et reviens.");
+                }, 1000);
+            }
+        });
 
+        // Quiz results calculation
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            const form = document.getElementById('quiz-form');
+            let earnestness = 50, asceticism = 50, beckVortex = 50; // Default scores
+
+            const answers = new FormData(form);
+            for (let [key, value] of answers.entries()) {
+                const val = parseInt(value);
+                if (key === 'q2' || key === 'q5' || key === 'q8' ||
         document.getElementById('submit-quiz').addEventListener('click', function() {
             const form = document.getElementById('quiz-form');
             let earnestness = 50, asceticism = 50, beckVortex = 50; // Default scores
